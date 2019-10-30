@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -41,13 +42,38 @@ func main() {
 	s := testArr[:6]
 	printSlice(s)
 
-	var z []int
+	var z []int // empty array = nil
 	fmt.Println(z, len(z), cap(z))
 	if z == nil {
 		fmt.Println("nil!")
 	}
+
+	// make slices directly, optional capacity 3rd arg
+	sa := make([]int,5,10) // len(sa) = 5, cap 10 
+	printSlice(sa)
+
+	makeBoard()
 }
 
 func printSlice(s []int) { // functions can be after main
 	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+
+func makeBoard(){
+	board:=[][]string{
+		[]string{"-","-","-"},
+		[]string{"-","-","-"},
+		[]string{"-","-","-"},
+	}
+
+	// The players take turns.
+	board[0][0] = "X"
+	board[2][2] = "O"
+	board[1][2] = "X"
+	board[1][0] = "O"
+	board[0][2] = "X"
+
+	for i := 0; i < len(board); i++ {
+		fmt.Printf("%s\n", strings.Join(board[i], " "))
+	}
 }
