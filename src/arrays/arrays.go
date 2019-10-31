@@ -5,6 +5,52 @@ import (
 	"strings"
 )
 
+func printSlice(s []int) { // functions can be after main
+	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+
+func makeBoard() {
+	board := [][]string{
+		[]string{"-", "-", "-"},
+		[]string{"-", "-", "-"},
+		[]string{"-", "-", "-"},
+	}
+
+	// The players take turns.
+	board[0][0] = "X"
+	board[2][2] = "O"
+	board[1][2] = "X"
+	board[1][0] = "O"
+	board[0][2] = "X"
+
+	for i := 0; i < len(board); i++ {
+		fmt.Printf("%s\n", strings.Join(board[i], " "))
+	}
+}
+
+func sliceAppend() {
+	var s []int
+	printSlice(s)
+
+	s = append(s, 0)
+	fmt.Println("append to nil slice")
+	printSlice(s)
+
+	s = append(s, 1)
+	fmt.Println("append single")
+	printSlice(s)
+
+	s = append(s, 2, 3, 4)
+	fmt.Println("append multiple")
+	printSlice(s)
+}
+
+func rangeLoop(arr []int) {
+	for i, v := range arr { // use _ to skip i idx or v value in i,v pair
+		fmt.Printf("2**%d = %d\n", i, v)
+	}
+}
+
 func main() {
 	var a [2]string
 	a[0] = "hello"
@@ -36,7 +82,7 @@ func main() {
 	}
 	fmt.Println(arrOfStruct)
 
-	testArr :=[10]int{1,2,3,4,5,6,7,8,9,10}
+	testArr := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	fmt.Println(testArr[:5], testArr[5:], testArr[:])
 
 	s := testArr[:6]
@@ -49,31 +95,14 @@ func main() {
 	}
 
 	// make slices directly, optional capacity 3rd arg
-	sa := make([]int,5,10) // len(sa) = 5, cap 10 
+	sa := make([]int, 5, 10) // len(sa) = 5, cap 10
 	printSlice(sa)
 
 	makeBoard()
-}
 
-func printSlice(s []int) { // functions can be after main
-	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
-}
+	fmt.Println("slice append")
+	sliceAppend()
 
-func makeBoard(){
-	board:=[][]string{
-		[]string{"-","-","-"},
-		[]string{"-","-","-"},
-		[]string{"-","-","-"},
-	}
-
-	// The players take turns.
-	board[0][0] = "X"
-	board[2][2] = "O"
-	board[1][2] = "X"
-	board[1][0] = "O"
-	board[0][2] = "X"
-
-	for i := 0; i < len(board); i++ {
-		fmt.Printf("%s\n", strings.Join(board[i], " "))
-	}
+	pow := []int{1, 2, 4, 8, 16, 32, 64, 128}
+	rangeLoop(pow)
 }
