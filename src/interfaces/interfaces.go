@@ -52,6 +52,21 @@ func describe(i interface{}) {
 	fmt.Printf("(%v, %T)\n", i, i)
 }
 
+// Stringer interface
+type Stringer interface {
+	String() string
+}
+
+// Person struct
+type Person struct {
+	Name string
+	Age int
+}
+
+func (p Person) String() string{
+	return fmt.Sprintf("%v (%v years)", p.Name, p.Age)
+}
+
 func main() {
 	var a Abser
 	f := MyFloat(-math.Sqrt2)
@@ -67,4 +82,8 @@ func main() {
 
 	var z interface{}
 	describe(z)
+
+	b := Person{"Art dent", 42}
+	c := Person{"Zephyr G", 9000}
+	fmt.Println(b,c)
 }
