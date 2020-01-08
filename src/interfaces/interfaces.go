@@ -48,6 +48,10 @@ func (v *Vertex) Abs() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y)
 }
 
+func describe(i interface{}) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+
 func main() {
 	var a Abser
 	f := MyFloat(-math.Sqrt2)
@@ -60,4 +64,7 @@ func main() {
 
 	var i I = T{"hello"}
 	i.Method()
+
+	var z interface{}
+	describe(z)
 }
